@@ -1,22 +1,20 @@
-# hiketools
+# HikeTools
 
 Geographic tools for hikers
 
-## HikeGen
+HikeTools takes a GPX file as input (or a XOL), and generates an HTML page with a Google Map and a profile chart.
 
-HikeGen takes a GPX file as input, and generates an HTML page with a Google Map and a profile chart.
+## Using HikeTools
 
-### Using HikeGen
-
-HikeGen is run with the following command:
+HikeTools is run with the following command:
 
 ```sh
-java -jar hikegen.jar [<option>...] <track-file>
+java -jar hiketools.jar [<option>...] <track-file>
 ```
 
 `<track-file>` contains your hike's track in GPX or XOL (SwissMap) format.
 
-#### Options
+### Options
 
 <dl>
 <dt>`-ele`</dt>
