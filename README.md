@@ -2,8 +2,6 @@
 
 Geographic tools for hikers
 
-#summary One-sentence summary of this page.
-
 ## HikeGen
 
 HikeGen takes a GPX file as input, and generates an HTML page with a Google Map and a profile chart.
