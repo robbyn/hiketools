@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title>${title}</title>
+        <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false">
+        </script>
+        <script type="text/javascript">
+            function load() {
+                var path = google.maps.geometry.encoding.decodePath('${track}');
+                var bounds = new google.maps.LatLngBounds(path[0]);
+                for (var i = 1; i < path.length; ++i) {
+                    bounds.extend(path[i]);
+                }
+                var mapOptions = {
+                    zoom: 8,
+                    center: bounds.getCenter(),
+                    mapTypeId: google.maps.MapTypeId.TERRAIN
+                };
+                var map = new google.maps.Map(document.getElementById("map"),
+                        mapOptions);
+                var polyOptions = {
+                    path: path,
+                    strokeColor: '${color}',
+                    strokeOpacity: ${opacity},
+                    strokeWeight: ${weight}
+                }
+                var poly = new google.maps.Polyline(polyOptions);
+                poly.setMap(map);
+                map.fitBounds(bounds);
+            }
+        </script>
+        <style type="text/css">
+#wrapper {
+    margin: auto;
+    width: 600px;
+}
+table {
+    margin: auto;
+}
+th,td {
+    white-space: nowrap;
+}
+th {
+    font-weight: normal;
+    text-align: left;
+}
+td {
+    font-weight: bold;
+    text-align: right;
+}
+td#maps {
+    text-align: left;
+}
+        </style>
+    </head>
+#set( $pattern = '#,##0' )
+    <body onload="load()">
+        <div id="wrapper">
+            <a rel="external" target="_blank" href="track.gpx">Trace GPX</a>,
+            <a rel="external" target="_blank" href="${album-path}album/${path}index.html">Galerie de photos</a>
+            <div id="map" style="width: 600px; height: 600px"></div>
+            <img src="profile.png" alt="Profile"/>
+            <table cellspacing="4" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <th>Altitude min/max:</th>
+                        <td>${util.formatDouble($summary.minElevation,$pattern)}m</td>
+                        <td>${util.formatDouble($summary.maxElevation,$pattern)}m</td>
+                    </tr>
+                    <tr>
+                        <th>Dénivelé::</th>
+                        <td>+${util.formatDouble($summary.ascent,$pattern)}m</td>
+                        <td>-${util.formatDouble($summary.descent,$pattern)}m</td>
+                    </tr>
+                    <tr>
+                        <th>Distance:</th>
+                        <td>${util.formatDouble($summary.distance,$pattern)}m</td>
+                        <td></td>
+                    </tr>
+#if( false )
+                    <tr>
+                        <th>Maps</th>
+                        <td id="maps" colspan="2">
+#set( $first = true )
+#foreach ( $map in $maps )#if( $first )#set( $first = false )#else, #{end}CN$map#end
+                        </td>
+                    </tr>
+#end
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

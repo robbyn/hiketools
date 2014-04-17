@@ -1,0 +1,3 @@
+0.21:
+    - no escaping of quotes in an encoded polyline when using the elevation
+      service (that could result in an INVALID_REQUEST).
