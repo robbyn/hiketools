@@ -5,22 +5,20 @@ Geographic tools for hikers
 
 #summary One-sentence summary of this page.
 
-= HikeGen =
+HikeGen
+=======
 
 HikeGen takes a GPX file as input, and generates an HTML page with a Google Map and a profile chart.
 
-== Installation ==
 
- * Download hikegen-xx.yy.zip from the [http://code.google.com/p/hiketools/downloads/list Downloads] page,
- * Unzip it
-
-== Using HikeGen ==
+Using HikeGen
+-------------
 
 HikeGen is run with the following command:
 
-{{{
+```sh
 java -jar hikegen.jar [<option>...] <track-file>
-}}}
+```
 
 `<track-file>` contains your hike's track in GPX or XOL (SwissMap) format.
 
