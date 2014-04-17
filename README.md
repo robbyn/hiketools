@@ -29,5 +29,5 @@ java -jar hikegen.jar [<option>...] <track-file>
 <dd>write a XOL file</dd>
 <dt>`-sim <`tolerance`>`</dt>
 <dd>simplify the track by applying the Douglas-Peucker agorithm, with the given tolerance.
-The tolerance is given in meters, the default is 1m. Use `-sim 0` to avoid simplification.</dd>
+The tolerance is given in meters, the default is 1m. Use `-sim 0` to avoid simplification altogether.</dd>
 </dl>
