@@ -101,7 +101,7 @@ public class EarthGeometry {
         double costh = sinlata*sinlatb
                 + coslata*coslatb*(coslnga*coslngb+sinlnga*sinlngb);
         double sin2th = 1-costh*costh;
-        if (sin2th < 1.0E-20) {
+        if (sin2th < 1.0E-8) {
             // a and b are very close; return distance from a to p
             double costhp = sinlata*sinlatp
                     + coslata*coslatp*(coslnga*coslngp+sinlnga*sinlngp);
