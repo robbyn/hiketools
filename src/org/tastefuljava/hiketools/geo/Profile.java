@@ -39,6 +39,7 @@ public class Profile {
         }
         ImageIO.write(img, "png", file);
     }
+
     public static void writeSVG(TrackPoint points[], int width, int height,
             File file) throws IOException {
         JFreeChart chart = createChart(points);
