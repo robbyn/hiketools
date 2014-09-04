@@ -20,7 +20,7 @@ public class ElevationService {
 
     private static final int CONNECT_TIMEOUT = 10000;
     private static final int READ_TIMEOUT = 10000;
-    private static final int MAX_COUNT = 50;
+    private static final int MAX_COUNT = 100;
     private static final String SERVICE_URL
             = "http://maps.google.com/maps/api/elevation/xml";
 
@@ -37,6 +37,25 @@ public class ElevationService {
     }
 
     private static void getElevations(TrackPoint trkpts[], int start,
+            int count) throws IOException {
+        for (int i = 0; i < 20; ++i) {
+            String status = getElevations1(trkpts, start, count);
+            if (status.equals("OK")) {
+                return;
+            } else if (status.equals("OVER_QUERY_LIMIT")) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    LOG.log(Level.SEVERE, null, ex);
+                }
+            } else {
+                throw new IOException("Error getting elevations: " + status);
+            }
+        }
+        throw new IOException("Error getting elevations: too many retries");
+    }
+        
+    private static String getElevations1(TrackPoint trkpts[], int start,
             int count) throws IOException {
         String enc = GMapEncoder.encodePoints(trkpts, start, count);
         String url = SERVICE_URL + "?locations=enc:"
@@ -57,7 +76,7 @@ public class ElevationService {
             }
             InputStream stream = con.getInputStream();
             try {
-                parseResults(trkpts, start, stream);
+                return parseResults(trkpts, start, stream);
             } finally {
                 stream.close();
             }
@@ -69,7 +88,7 @@ public class ElevationService {
         }
     }
 
-    private static void parseResults(TrackPoint trkpts[], int start,
+    private static String parseResults(TrackPoint trkpts[], int start,
             InputStream in) throws IOException, SAXException {
         XMLReader reader = null;
         try {
@@ -89,12 +108,14 @@ public class ElevationService {
         reader.setContentHandler(handler);
         reader.setErrorHandler(handler);
         reader.parse(new InputSource(in));
+        return handler.status;
     }
 
     private static class Handler extends DefaultHandler {
-        private TrackPoint[] trkpts;
+        private final TrackPoint[] trkpts;
         private int current = 0;
         private StringBuilder buf = new StringBuilder();
+        private String status = "";
 
         private Handler(TrackPoint[] trkpts, int start) {
             this.trkpts = trkpts;
@@ -118,10 +139,9 @@ public class ElevationService {
                 trkpts[current] = dst;
                 ++current;
             } else if (localName.equals("status")) {
-                String status = buf.toString();
+                status = buf.toString();
                 if (!status.equals("OK")) {
                     LOG.log(Level.SEVERE, "Status: {0}", status);
-                    throw new SAXException("Status not OK");
                 }
             }
         }
