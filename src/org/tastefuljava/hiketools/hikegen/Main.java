@@ -101,6 +101,8 @@ public class Main {
         Summary summary = Summary.compute(trk);
         Profile.writeProfile(trk, 600, 200,
                 new File(dir, "profile.png"));
+        Profile.writeSVG(trk, 600, 200,
+                new File(dir, "profile.svg"));
         VelocityContext context = new VelocityContext();
         context.put("name", name);
         context.put("title", "Map for " + name);

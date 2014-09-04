@@ -5,7 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.imageio.ImageIO;
@@ -18,6 +22,7 @@ import org.jfree.chart.renderer.xy.XYAreaRenderer;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
+import org.jfree.graphics2d.svg.SVGGraphics2D;
 import org.jfree.ui.RectangleInsets;
 
 public class Profile {
@@ -33,6 +38,23 @@ public class Profile {
             g.dispose();
         }
         ImageIO.write(img, "png", file);
+    }
+    public static void writeSVG(TrackPoint points[], int width, int height,
+            File file) throws IOException {
+        JFreeChart chart = createChart(points);
+        SVGGraphics2D g = new SVGGraphics2D(width, height);
+        chart.draw(g, new Rectangle(0, 0, width, height));
+        OutputStream stream = new FileOutputStream(file);
+        try {
+            Writer out = new OutputStreamWriter(stream, "UTF-8");
+            try {
+                out.write(g.getSVGDocument());
+            } finally {
+                out.close();
+            }
+        } finally {
+            stream.close();
+        }
     }
 
     public static JFreeChart createChart(TrackPoint points[]) {
