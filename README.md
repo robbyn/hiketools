@@ -17,7 +17,7 @@ java -jar hiketools.jar [<option>...] <track-file>
 ### Options
 
 <dl>
-<dt>`-ele`</dt>
+<dt>-ele</dt>
 <dd>use the elevation service to update the elevation</dd>
 <dt>`-gpx`</dt>
 <dd>write a GPX file</dd>
