@@ -19,11 +19,11 @@ java -jar hiketools.jar [<option>...] <track-file>
 <dl>
 <dt>-ele</dt>
 <dd>use the elevation service to update the elevation</dd>
-<dt>`-gpx`</dt>
+<dt>-gpx</dt>
 <dd>write a GPX file</dd>
-<dt>`-xol`</dt>
+<dt>-xol</dt>
 <dd>write a XOL file</dd>
-<dt>`-sim <`tolerance`>`</dt>
+<dt>-sim <`tolerance`></dt>
 <dd>simplify the track by applying the Douglas-Peucker agorithm, with the given tolerance.
 The tolerance is given in meters, the default is 1m. Use `-sim 0` to avoid simplification altogether.</dd>
 </dl>
