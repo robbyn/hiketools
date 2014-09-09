@@ -114,7 +114,7 @@ public class ElevationService {
     private static class Handler extends DefaultHandler {
         private final TrackPoint[] trkpts;
         private int current = 0;
-        private StringBuilder buf = new StringBuilder();
+        private final StringBuilder buf = new StringBuilder();
         private String status = "";
 
         private Handler(TrackPoint[] trkpts, int start) {
