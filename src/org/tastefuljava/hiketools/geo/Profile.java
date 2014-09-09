@@ -26,7 +26,7 @@ import org.jfree.graphics2d.svg.SVGGraphics2D;
 import org.jfree.ui.RectangleInsets;
 
 public class Profile {
-    public static void writeProfile(TrackPoint points[], int width, int height,
+    public static void writePNG(TrackPoint points[], int width, int height,
             File file) throws IOException {
         JFreeChart chart = createChart(points);
         BufferedImage img = new BufferedImage(width, height,

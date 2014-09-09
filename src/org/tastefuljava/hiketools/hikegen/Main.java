@@ -99,7 +99,7 @@ public class Main {
             XolWriter.writeTrack(trk, new File(dir, name + ".xol"));
         }
         Summary summary = Summary.compute(trk);
-        Profile.writeProfile(trk, 600, 200,
+        Profile.writePNG(trk, 600, 200,
                 new File(dir, "profile.png"));
         Profile.writeSVG(trk, 600, 200,
                 new File(dir, "profile.svg"));
