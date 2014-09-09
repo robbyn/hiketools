@@ -94,7 +94,7 @@
         </copy>
     </target>
 
-    <target name="zip-bin" depends="jar">
+    <target name="zip-bin" depends="clean,jar">
         <zip destfile="dist/hikegen-${hiketools-version}.zip">
             <zipfileset dir="dist" prefix="hikegen-${hiketools-version}"
                     excludes="hikegen-*.zip"/>

@@ -31,6 +31,12 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.tastefuljava.hiketools.geo.EarthGeometry;
 
 public class Main {
+    static {
+        // This is especially useful on Mac OS to avoid the default app to be
+        // Launched and appear in the dock and in the menu bar
+        System.setProperty("java.awt.headless", "true");
+    }
+
     private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
