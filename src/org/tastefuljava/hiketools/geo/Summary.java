@@ -1,14 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.tastefuljava.hiketools.geo;
 
-/**
- *
- * @author maurice
- */
 public class Summary {
     private double minElevation;
     private double maxElevation;
