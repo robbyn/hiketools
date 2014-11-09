@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.tastefuljava.hiketools.geo;
 
 import java.io.File;
@@ -13,10 +8,6 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-/**
- *
- * @author maurice
- */
 public class GpxWriter {
     private static final DateFormat TIME_FORMAT
             = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
