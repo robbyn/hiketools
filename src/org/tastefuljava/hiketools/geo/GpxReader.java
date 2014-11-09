@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.tastefuljava.hiketools.geo;
 
 import java.io.File;
@@ -22,15 +17,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**
- *
- * @author perrym
- */
 public class GpxReader extends DefaultHandler {
     private static final DateFormat TIME_FORMAT
             = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
-    private List<TrackPoint> track = new ArrayList<TrackPoint>();
+    private final List<TrackPoint> track = new ArrayList<TrackPoint>();
     private StringBuffer buf = new StringBuffer();
     private double lat;
     private double lon;
