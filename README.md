@@ -1,3 +1,7 @@
+# WARNING
+
+This project is not maintained anymore: it is superceded by project Gianadda
+
 # HikeTools
 
 Geographic tools for hikers
