@@ -1,6 +1,6 @@
 # WARNING
 
-This project is not maintained anymore: it is superceded by project Gianadda
+This project is not maintained anymore: it is superceded by project [Gianadda](http://gianadda.perry.productions/)
 
 # HikeTools
 
