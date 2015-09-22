@@ -20,6 +20,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URLEncoder;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -84,6 +85,7 @@ public class Main {
         } else {
             trk = GpxReader.readTrack(file);
         }
+        sanitize(trk);
         int maps[] = mapNumbers(trk);
         System.out.println("Read " + trk.length + " points from " + file);
         if (epsilon > 0) {
@@ -209,5 +211,37 @@ public class Main {
             dir = dir.getParentFile();
         }
         return null;
+    }
+
+    private static void sanitize(TrackPoint[] trk) {
+        int i = 0;
+        while (i < trk.length && trk[i].getTime() == null) {
+            ++i;
+        }
+        if (i > 0) {
+            if (i >= trk.length) {
+                LOG.info("No timestamp in file");
+            } else {
+                Date ts = trk[i].getTime();
+                for (int j = 0; j < i; ++j) {
+                    TrackPoint pt = trk[j];
+                    LOG.log(Level.INFO, "Copy first timestamp to point {0}", i);
+                    trk[j] = new TrackPoint(pt.getLat(), pt.getLng(), pt.getH(),
+                            ts);
+                }
+                while (++i < trk.length) {
+                    TrackPoint pt = trk[i];
+                    Date ts2 = pt.getTime();
+                    if (ts2 == null || ts2.before(ts)) {
+                        LOG.log(Level.INFO,
+                                "Copy first timestamp to point {0}", i);
+                        trk[i] = new TrackPoint(pt.getLat(), pt.getLng(),
+                                pt.getH(), ts);
+                    } else {
+                        ts = ts2;
+                    }
+                }
+            }
+        }
     }
 }
