@@ -43,16 +43,20 @@ public class ElevationService {
             if (status.equals("OK")) {
                 return;
             } else if (status.equals("OVER_QUERY_LIMIT")) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    LOG.log(Level.SEVERE, null, ex);
-                }
+                delay(1000);
             } else {
                 throw new IOException("Error getting elevations: " + status);
             }
         }
         throw new IOException("Error getting elevations: too many retries");
+    }
+
+    private static void delay(long delay) {
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
     }
         
     private static String getElevations1(TrackPoint trkpts[], int start,
